@@ -22,7 +22,7 @@ metadata:
   namespace: ${NAMESPACE} 
 subjects:
   - kind: ServiceAccount
-    name: $NAMESPACE-sa
+    name: ${USER_NAME}-sa
     namespace: ${NAMESPACE} 
 roleRef:
   kind: Role
