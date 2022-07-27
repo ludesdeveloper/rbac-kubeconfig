@@ -80,3 +80,23 @@ kubectl apply -f rbac_manifests.yaml
 ```
 kubectl --kubeconfig config get pods
 ```
+
+###**Update Rules**
+
+1. Take a look in create_manifest script. Here you can update rule to your RBAC
+
+```
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "services", "namespaces", "nodes"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["pods/portforward"]
+    verbs: ["create", "get", "update", "list", "delete", "watch", "patch"]
+  - apiGroups: ["apps"]
+    resources: ["deployments", "statefulsets", "daemonsets", "replicasets"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["rbac.authorization.k8s.io"]
+    resources: ["clusterroles", "clusterrolebindings"]
+    verbs: ["get", "list", "watch"]
+```
