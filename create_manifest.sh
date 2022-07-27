@@ -32,7 +32,7 @@ roleRef:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: ${USER_NAME} 
+  name: ${USER_NAME}-sa 
   namespace: ${NAMESPACE} 
 secrets:
   - name: ${USER_NAME}-secret
