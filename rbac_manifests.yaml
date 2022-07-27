@@ -1,0 +1,46 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: bill 
+  namespace: atrbpn
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "services", "namespaces", "nodes"]
+    verbs: ["create", "get", "update", "list", "watch", "patch"]
+  - apiGroups: ["apps"]
+    resources: ["deployment"]
+    verbs: ["create", "get", "update", "list", "delete", "watch", "patch"]
+  - apiGroups: ["rbac.authorization.k8s.io"]
+    resources: ["clusterroles", "clusterrolebindings"]
+    verbs: ["create", "get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: bill 
+  namespace: atrbpn 
+subjects:
+  - kind: ServiceAccount
+    name: atrbpn-sa
+    namespace: atrbpn 
+roleRef:
+  kind: Role
+  name: bill 
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: bill 
+  namespace: atrbpn 
+secrets:
+  - name: bill-secret
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bill-secret
+  namespace: atrbpn 
+  annotations:
+    kubernetes.io/service-account.name: bill-sa
+type: kubernetes.io/service-account-token
