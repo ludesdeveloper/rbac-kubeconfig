@@ -12,3 +12,7 @@ export NAMESPACE=mynamespace
 kubectl apply -f rbac_manifests.yaml
 ./create_kubeconfig.sh
 ```
+
+```
+kubectl --kubeconfig config get pods
+```
